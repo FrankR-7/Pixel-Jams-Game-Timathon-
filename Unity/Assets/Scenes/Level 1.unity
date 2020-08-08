@@ -356,8 +356,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 1
-  length: 10
-  width: 10
   myPrefab: {fileID: 8781437026553081261, guid: 507ecc0b5361caf48a168a89bd54826b,
     type: 3}
   parent: {fileID: 1297251714}

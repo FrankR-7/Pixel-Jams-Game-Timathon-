@@ -359,10 +359,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5a62c21e773c3439786aa227d416c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 2.5
   myPrefab: {fileID: 8781437026553081261, guid: 507ecc0b5361caf48a168a89bd54826b,
     type: 3}
   parent: {fileID: 1297251714}
+  size: 2.5
+  m: 40
+  n: 40
 --- !u!4 &1678162387
 Transform:
   m_ObjectHideFlags: 0
