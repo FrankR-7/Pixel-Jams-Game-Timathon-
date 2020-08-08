@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    CharacterController cont;
-    public GameObject lantern;
-    [SerializeField] float speed = 5;
-    [SerializeField] Vector3 movement;
-    [SerializeField] Vector3 offset = new Vector3(0,5,0);
-
+    private CharacterController _controller;
+    [SerializeField] private Vector3 movement;
+    [SerializeField] private int MoveSpeed;
+    [SerializeField] private int RotateSpeed;
+    
     void Start()
     {
-        cont = gameObject.GetComponent<CharacterController>();
+        _controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    void Update() //todo - make the player turn
     {
-        lantern.transform.position = gameObject.transform.position + offset;
-        movement = new Vector3(Input.GetAxis("Horizontal")*speed, 0f, Input.GetAxis("Vertical")*speed);
-        cont.Move(movement*Time.deltaTime);
+        movement = new Vector3(Input.GetAxis("Horizontal")*MoveSpeed, 0f, Input.GetAxis("Vertical")*MoveSpeed);
+        Vector3 relative = movement + transform.position;
+        _controller.Move(movement*Time.deltaTime);
     }
 }
