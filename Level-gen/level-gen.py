@@ -23,16 +23,10 @@ rooms = []
 room = Room(0, 0, size[1], size[0])
 rooms.append(room)
 
-levels = []
-
-# Faulty
 def generate_rooms(act, level):
     next = act.split(level)
-    # print(next if type(next)==int else '')
-    print(act.size)
     if next != -1:
         level = next[0]
-        levels.append(level)
         room = Room(*next[1:])
         rooms.append(room)
         if not room.state:
@@ -41,17 +35,19 @@ def generate_rooms(act, level):
         level = generate_rooms(act, level)
     return level
 
-
 map = generate_rooms(room, map)
 
-# Debugging and stuff, I dont like those negative rooms
+# Don't worry about this v
+'''
+for room in rooms:
+    map = room.generate_floor(map)
+'''
+
+# Debugging and stuff
 plt.xticks([])
 plt.yticks([])
-plt.imshow(map, cmap='Greys')
-# plt.scatter([room.x1 for room in rooms] + [room.x2 for room in rooms], [room.y1 for room in rooms] + [room.y2 for room in rooms])
+plt.imshow(map)
 plt.show()
 print('no. of rooms: ', len(rooms))
-# debug = list(zip([(room.width, room.height) for room in rooms], [room.start for room in rooms],
-                 #[room.end for room in rooms], [room.size for room in rooms]))
-# print(debug)
-# print(levels)
+
+print(json.dumps(map.tolist()))
