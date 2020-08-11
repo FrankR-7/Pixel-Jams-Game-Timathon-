@@ -1,10 +1,11 @@
 import random
 
+
 class Room:
     def __init__(self, x_1, y_1, x_2, y_2):
         self.x1, self.x2, self.y1, self.y2 = x_1, x_2, y_1, y_2
-        self.width = (self.x2 - self.x1)+1
-        self.height = (self.y2 - self.y1)+1
+        self.width = (self.x2 - self.x1) + 1
+        self.height = (self.y2 - self.y1) + 1
         self.size = self.width * self.height
         self.type = 'normal'
         self.state = False
@@ -18,8 +19,8 @@ class Room:
     def draw_walls(self, matrix):
         # This works, but I think I can optimise this better
         # If performance ever becomes an issue, I'll change this part
-        wallx = [i for i in range(self.x1, self.x2+1)]
-        wally = [i for i in range(self.y1, self.y2+1)]
+        wallx = [i for i in range(self.x1, self.x2 + 1)]
+        wally = [i for i in range(self.y1, self.y2 + 1)]
 
         for m in wallx:
             for n in [self.y1, self.y2]:
@@ -76,7 +77,7 @@ class Room:
             self.height = (self.y2 - self.y1)
             self.size = self.width * self.height
 
-            #I'll decide later if I wanna implemet this
+            # I'll decide later if I wanna implemet this
             '''if self.size < 9:
                 self.state = True
                 return -1'''
@@ -93,17 +94,14 @@ class Room:
 
     def draw(self, matrix):
         # Unified func for updating the map, will give better performance
-        if self.type in ['hall','void_hall']:
-            pass # Coming soon
-        elif self.type in ['normal','chest','start','end']:
-            matrix = self.draw_walls(matrix.copy())
-            floorx = [i for i in range(self.x1+1, self.x2)]
-            floory = [i for i in range(self.y1+1, self.y2)]
-            for x in floorx:
-                for y in floory:
-                    if random.choice([True, False]):
-                        matrix[y,x] = 2
-                    else:
-                        matrix[y,x] = 3
+        matrix = self.draw_walls(matrix.copy())
+        floorx = [i for i in range(self.x1 + 1, self.x2)]
+        floory = [i for i in range(self.y1 + 1, self.y2)]
+        for x in floorx:
+            for y in floory:
+                if random.choices([True, False], [3, 1])[0]:
+                    matrix[y, x] = 2
+                else:
+                    matrix[y, x] = 3
 
         return matrix
