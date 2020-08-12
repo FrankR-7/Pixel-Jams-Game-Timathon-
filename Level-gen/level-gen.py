@@ -36,7 +36,7 @@ def generate_rooms(act):
 generate_rooms(room)
 
 # Room selection
-normal_rooms = rooms[::2]
+normal_rooms = rooms[::2].copy()
 halls = []
 
 # Hallway system
@@ -54,6 +54,12 @@ for hall in halls:
     out = hall.generate(map.copy())
     if type(out) is not int:
         map = out
+    else:
+        map = hall.findmode(map.copy(),False)
+        halls.remove(hall)
+
+for room in normal_rooms:
+    map = room.draw_doors(map.copy())
 
 # Debugging and stuff
 plt.xticks([])

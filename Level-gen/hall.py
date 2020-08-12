@@ -29,24 +29,24 @@ class Hall:
                 try:
                     if matrix[o, m] == 4:
                         doors.append((m, o, q))
-                    elif matrix[n, m] != 0 and matrix[n, m] != 1:
-                        if q ==1:
+                    elif matrix[n, m] != 0 and matrix[n, m] != 1 and matrix[n, m] != 4:
+                        if q == 1:
                             up.append((m, o))
                         else:
                             down.append((m, o))
-                except Exception as e:
+                except:
                     pass
         for n, o, q in zip(*[[self.x1 - 1, self.x2 + 1], [self.x1, self.x2], [3, 4]]):
             for m in self.fy:
                 try:
                     if matrix[m, o] == 4:
                         doors.append((o, m, q))
-                    elif matrix[m, n] != 0 or matrix[m,n] != 1:
-                        if q==3:
+                    elif matrix[m, n] != 0 and matrix[m, n] != 1 and matrix[n, m] != 4:
+                        if q == 3:
                             left.append((o, m))
                         else:
-                            right.append((o,m))
-                except Exception as e:
+                            right.append((o, m))
+                except:
                     pass
 
         up = random.choice(up) if len(up) >= 1 else -1
@@ -66,17 +66,21 @@ class Hall:
         if not amt <= 0:
             for door in doors:
                 l = door[2]
-                sides[l-1] = -1
+                sides[l - 1] = -1
 
         sides = [side for side in sides if side != -1]
-        while amt != 0:
-            doors.append(random.choice(sides))
+        while amt != 0 and len(sides) != 0:
+            w = random.choice(sides)
+            doors.append(w)
+            sides.remove(w)
             amt -= 1
+            if amt == 0 or len(sides) == 0:
+                break
 
         if len(doors) <= 1:
             return -1
 
         for door in doors:
-            matrix[door[1],door[0]] = 4
+            matrix[door[1], door[0]] = 4
 
         return matrix
