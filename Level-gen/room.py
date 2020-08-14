@@ -71,7 +71,7 @@ class Room:
         return up, down, left, right, doors
 
     def draw_doors(self, matrix):
-        amt = random.choice([2,3])
+        amt = random.choices([2,3],[2,1])[0]
 
         *sides, doors = self.find_neighbors(matrix)
         amt -= len(doors)

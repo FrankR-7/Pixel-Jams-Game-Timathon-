@@ -56,10 +56,15 @@ for hall in halls:
         map = out
     else:
         map = hall.findmode(map.copy(),False)
-        halls.remove(hall)
 
 for room in normal_rooms:
     map = room.draw_doors(map.copy())
+
+for hall in halls:
+    map = hall.generate_hall_1(map.copy())
+for hall in halls: # again
+    if len(hall.meta):
+        map = hall.generate_hall_2(map.copy())
 
 # Debugging and stuff
 plt.xticks([])
