@@ -23,7 +23,7 @@ public class Generator : MonoBehaviour
     void Start()
     {
         alt = 0;
-        System.Diagnostics.Process p = System.Diagnostics.Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Level Generation", "level-gen.exe"), m.ToString()+" "+n.ToString());
+        Process p = Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Level Generation", "level-gen.exe"), m.ToString()+" "+n.ToString());
         p.StartInfo.UseShellExecute = false;
         p.StartInfo.CreateNoWindow = true;
         p.StartInfo.RedirectStandardOutput = true;
@@ -75,7 +75,7 @@ public class Generator : MonoBehaviour
         {
             GameObject block = Instantiate(wall, new Vector3(x * size, j*size, i * size), Quaternion.identity);
             block.isStatic = true;
-            block.transform.localScale = new Vector3(size, size, size);
+            block.transform.localScale = new Vector3(size, size*2, size);
             block.transform.SetParent(parent.transform);
         }
     }
@@ -113,11 +113,5 @@ public class Generator : MonoBehaviour
         GameObject block2 = Instantiate(door, new Vector3(x * size, 3*size/2, i * size), Quaternion.identity);
         block2.transform.localScale = new Vector3(size, 2*size, size);
         block2.transform.SetParent(parent.transform);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

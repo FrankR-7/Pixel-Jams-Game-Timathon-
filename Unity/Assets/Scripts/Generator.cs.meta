@@ -3,7 +3,13 @@ guid: 0b5a62c21e773c3439786aa227d416c2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - floor: {fileID: 8781437026553081261, guid: 507ecc0b5361caf48a168a89bd54826b, type: 3}
+  - wall: {fileID: 8781437026553081261, guid: 6db4f20d28a766e46a346c3e5a15af86, type: 3}
+  - grass: {fileID: 8781437026553081261, guid: 06077f8a925f62a4b9f485aa2a01633e, type: 3}
+  - door: {fileID: 8781437026553081261, guid: 981cd8eb4ad7adf4fa20145a896fce56, type: 3}
+  - parent: {instanceID: 0}
+  - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

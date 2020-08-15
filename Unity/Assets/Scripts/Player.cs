@@ -9,13 +9,12 @@ public class Player : MonoBehaviour
     private CharacterController _controller;
     [SerializeField] private Vector3 movement;
     [SerializeField] private int MoveSpeed;
-    [SerializeField] private int RotateSpeed;
+    [SerializeField] private float RotateSpeed = 0.15f;
     
     void Start()
     {
         CameraMovement.target = transform;
         Door.player = transform;
-
         _controller = GetComponent<CharacterController>();
     }
 
@@ -29,14 +28,9 @@ public class Player : MonoBehaviour
         Vector3 relative = movement + transform.position;
         _controller.Move(movement*Time.deltaTime);
 
-        //Rotation - Well Woah idk if this was what u planned to do so feel free to do your thing
-        if (horizontal > 0)
-            transform.rotation = Quaternion.Euler(0, 90, 0);
-        else if (horizontal < 0)
-            transform.rotation = Quaternion.Euler(0, -90, 0);
-        if (vertical > 0)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else if (vertical < 0)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (movement != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), RotateSpeed);
+        }
     }
 }

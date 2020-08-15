@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &89576431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8962411067774335113, guid: 828220f30c558654b9a37244c9e95155,
+    type: 3}
+  m_PrefabInstance: {fileID: 2083870470}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f03759cba7653438dfc579baa5deb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 10, z: -1}
+  offset: {x: 0, y: 20, z: 0}
 --- !u!1 &1297251714
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,10 +283,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5a62c21e773c3439786aa227d416c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stone: {fileID: 0}
-  grass: {fileID: 0}
-  door: {fileID: 0}
+  floor: {fileID: 8781437026553081261, guid: 507ecc0b5361caf48a168a89bd54826b, type: 3}
+  wall: {fileID: 8781437026553081261, guid: 6db4f20d28a766e46a346c3e5a15af86, type: 3}
+  grass: {fileID: 8781437026553081261, guid: 06077f8a925f62a4b9f485aa2a01633e, type: 3}
+  door: {fileID: 8781437026553081261, guid: 981cd8eb4ad7adf4fa20145a896fce56, type: 3}
   parent: {fileID: 1297251714}
+  player: {fileID: 89576431}
   m: 40
   n: 40
 --- !u!4 &1678162387
@@ -326,7 +334,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.15
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -480,6 +488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -67.58501
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138982389182467615, guid: 828220f30c558654b9a37244c9e95155,
+        type: 3}
+      propertyPath: RotateSpeed
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3635901976508927121, guid: 828220f30c558654b9a37244c9e95155,
         type: 3}
