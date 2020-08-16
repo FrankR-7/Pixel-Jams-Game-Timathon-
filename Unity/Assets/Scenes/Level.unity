@@ -217,7 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f03759cba7653438dfc579baa5deb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 10, z: -1}
 --- !u!1 &1297251714
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,8 +282,6 @@ MonoBehaviour:
   door: {fileID: 8781437026553081261, guid: 981cd8eb4ad7adf4fa20145a896fce56, type: 3}
   parent: {fileID: 1297251714}
   player: {fileID: 8962411067774335113, guid: 828220f30c558654b9a37244c9e95155, type: 3}
-  m: 30
-  n: 30
 --- !u!4 &1678162387
 Transform:
   m_ObjectHideFlags: 0
