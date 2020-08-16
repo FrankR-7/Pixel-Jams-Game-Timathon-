@@ -7,14 +7,14 @@ public class Player : MonoBehaviour
     private float horizontal;
     private float vertical;
     private CharacterController _controller;
-    [SerializeField] private Vector3 movement;
-    [SerializeField] private int MoveSpeed;
-    [SerializeField] private float RotateSpeed = 0.15f;
+    private Vector3 movement;
+    private float MoveSpeed = 15f;
+    private float RotateSpeed = 0.15f;
     
     void Start()
     {
         CameraMovement.target = transform;
-        Door.player = transform;
+        Door.entities.Add(transform);
         _controller = GetComponent<CharacterController>();
     }
 

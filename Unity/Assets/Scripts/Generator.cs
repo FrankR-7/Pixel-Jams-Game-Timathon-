@@ -15,7 +15,7 @@ public class Generator : MonoBehaviour
     public GameObject player;
 
     public static float size = 2.5f;
-    [SerializeField] private int m = 10, n = 10;
+    private int m = 20, n = 20;
 
     //To be removed after Frank adds start and end to level
     private int alt;
@@ -75,7 +75,7 @@ public class Generator : MonoBehaviour
         {
             GameObject block = Instantiate(wall, new Vector3(x * size, j*size, i * size), Quaternion.identity);
             block.isStatic = true;
-            block.transform.localScale = new Vector3(size, size*2, size);
+            block.transform.localScale = new Vector3(size, size, size);
             block.transform.SetParent(parent.transform);
         }
     }
