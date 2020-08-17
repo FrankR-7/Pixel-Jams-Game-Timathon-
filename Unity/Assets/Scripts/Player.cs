@@ -11,11 +11,9 @@ public class Player : MonoBehaviour
     private float MoveSpeed = 15f;
     private float RotateSpeed = 0.15f;
     
-    void Start()
+    void Awake()
     {
         _controller = GetComponent<CharacterController>();
-
-        CameraMovement.target = transform;
         Enemy1.player = transform;
         Door.entities.Add(transform);
     }
@@ -23,12 +21,16 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        //Movement
+        PlayerMovement();
+    }
+
+    private void PlayerMovement()
+    {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        movement = new Vector3(horizontal*MoveSpeed, 0f, vertical*MoveSpeed);
+        movement = new Vector3(horizontal * MoveSpeed, 0f, vertical * MoveSpeed);
         Vector3 relative = movement + transform.position;
-        _controller.Move(movement*Time.deltaTime);
+        _controller.Move(movement * Time.deltaTime);
 
         if (movement != Vector3.zero)
         {

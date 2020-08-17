@@ -19,12 +19,8 @@ public class Generator : MonoBehaviour
     public static float size = 2.5f;
     private int m = 20, n = 20;
 
-    //To be removed after Frank adds start and end to level
-    private int alt;
-
     void Start()
     {
-        alt = 0;
         Process p = Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Level Generation", "level-gen.exe"), m.ToString()+" "+n.ToString());
         p.StartInfo.UseShellExecute = false;
         p.StartInfo.CreateNoWindow = true;
@@ -89,17 +85,6 @@ public class Generator : MonoBehaviour
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
-
-        //To be removed after Frank adds start and end to level
-        ++alt;
-        if (alt == 1)
-        {
-            GameObject p = Instantiate(player, new Vector3(x * size, size + 1f, i * size), Quaternion.identity);
-        }
-        if (alt == 50)
-        {
-            GameObject e1 = Instantiate(enemy1, new Vector3(x * size, size + 1f, i * size), Quaternion.identity);
-        }
     }
 
     private void CreateGrass(int i, int x)
