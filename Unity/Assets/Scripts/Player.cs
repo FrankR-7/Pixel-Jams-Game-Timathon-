@@ -13,9 +13,11 @@ public class Player : MonoBehaviour
     
     void Start()
     {
-        CameraMovement.target = transform;
-        Door.entities.Add(transform);
         _controller = GetComponent<CharacterController>();
+
+        CameraMovement.target = transform;
+        Enemy1.player = transform;
+        Door.entities.Add(transform);
     }
 
     

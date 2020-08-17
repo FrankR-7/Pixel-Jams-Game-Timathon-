@@ -282,6 +282,7 @@ MonoBehaviour:
   door: {fileID: 8781437026553081261, guid: 981cd8eb4ad7adf4fa20145a896fce56, type: 3}
   parent: {fileID: 1297251714}
   player: {fileID: 8962411067774335113, guid: 828220f30c558654b9a37244c9e95155, type: 3}
+  enemy1: {fileID: 4709687677885672390, guid: 8b01e722040351b409af1f2895a02485, type: 3}
 --- !u!4 &1678162387
 Transform:
   m_ObjectHideFlags: 0

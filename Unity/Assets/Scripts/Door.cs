@@ -9,14 +9,15 @@ public class Door : MonoBehaviour
     private Vector3 close;
     private Vector3 open;
     
-    private float speed = 5f;
+    private float speed = 10f;
     private int state; //0 - close, 1 - open
 
     // Start is called before the first frame update
     void Start()
     {
-        close = transform.position;
-        open = new Vector3(transform.position.x, transform.position.y - 2 * Generator.size, transform.position.z);
+        open = transform.position;
+        close = new Vector3(transform.position.x, transform.position.y + 2 * Generator.size, transform.position.z);
+        transform.position = close;
     }
 
     // Update is called once per frame

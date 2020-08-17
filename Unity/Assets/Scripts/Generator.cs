@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
+using UnityEngine.AI;
 
 public class Generator : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Generator : MonoBehaviour
     public GameObject door;
     public GameObject parent;
     public GameObject player;
+    public GameObject enemy1;
 
     public static float size = 2.5f;
     private int m = 20, n = 20;
@@ -67,6 +69,7 @@ public class Generator : MonoBehaviour
                 }
             }
         }
+        GameObject.FindObjectOfType<NavMeshSurface>().GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
     private void CreateWall(int i, int x)
@@ -88,10 +91,14 @@ public class Generator : MonoBehaviour
         block.transform.SetParent(parent.transform);
 
         //To be removed after Frank adds start and end to level
-        if (alt == 0)
+        ++alt;
+        if (alt == 1)
         {
-            alt = 1;
-            GameObject p = Instantiate(player, new Vector3(x * size, size+1f, i * size), Quaternion.identity);
+            GameObject p = Instantiate(player, new Vector3(x * size, size + 1f, i * size), Quaternion.identity);
+        }
+        if (alt == 50)
+        {
+            GameObject e1 = Instantiate(enemy1, new Vector3(x * size, size + 1f, i * size), Quaternion.identity);
         }
     }
 
@@ -110,7 +117,7 @@ public class Generator : MonoBehaviour
         block1.transform.localScale = new Vector3(size, size, size);
         block1.transform.SetParent(parent.transform);
 
-        GameObject block2 = Instantiate(door, new Vector3(x * size, 3*size/2, i * size), Quaternion.identity);
+        GameObject block2 = Instantiate(door, new Vector3(x * size, -size/2, i * size), Quaternion.identity);
         block2.transform.localScale = new Vector3(size, 2*size, size);
         block2.transform.SetParent(parent.transform);
     }
