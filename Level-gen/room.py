@@ -8,6 +8,17 @@ class Room:
         self.height = (self.y2 - self.y1) + 1
         self.size = self.width * self.height
         self.type = 'normal'
+        self.types = {
+            'start' : 5,
+            'end' : 6,
+            'chest' : 7,
+            'upgrade' : 8,
+            'strength': 9,
+            'heal': 10,
+            'invisible': 11,
+            'dew': 12
+        }
+        self.items = []
         self.state = False
         if self.size < 9:
             self.state = True
@@ -17,8 +28,6 @@ class Room:
             self.state = True
 
     def draw_walls(self, matrix):
-        # This works, but I think I can optimise this better
-        # If performance ever becomes an issue, I'll change this part
         wallx = [i for i in range(self.x1, self.x2 + 1)]
         wally = [i for i in range(self.y1, self.y2 + 1)]
 
@@ -156,7 +165,7 @@ class Room:
 
             return nx, ny, ox, oy
 
-    def draw(self, matrix):
+    def fill(self, matrix):
         # Unified func for updating the map, will give better performance
         matrix = self.draw_walls(matrix.copy())
         floorx = [i for i in range(self.x1 + 1, self.x2)]
@@ -167,5 +176,18 @@ class Room:
                     matrix[y, x] = 2
                 else:
                     matrix[y, x] = 3
+
+        if self.type in ['start','end','chest']:
+            x = random.choice(floorx)
+            y = random.choice(floory)
+
+            matrix[y, x] = self.types[self.type]
+        else:
+            for item in self.items:
+                x = random.choice(floorx)
+                y = random.choice(floory)
+
+                if matrix[y,x] in [2,3]:
+                    matrix[y, x] = self.types[item]
 
         return matrix

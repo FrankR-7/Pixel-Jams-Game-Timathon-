@@ -75,8 +75,8 @@ class Hall:
                             matrix[y, x] = 1
             except: pass
 
-        for l in self.meta:
-            if self.type == 'normal':
+        if self.type == 'normal':
+            for l in self.meta:
                 addwalls(l[1],l[0])
 
         return matrix
