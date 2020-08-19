@@ -9,10 +9,10 @@ class Room:
         self.size = self.width * self.height
         self.type = 'normal'
         self.types = {
-            'start' : 5,
-            'end' : 6,
-            'chest' : 7,
-            'upgrade' : 8,
+            'start': 5,
+            'end': 6,
+            'chest': 7,
+            'upgrade': 8,
             'strength': 9,
             'heal': 10,
             'invisible': 11,
@@ -82,7 +82,7 @@ class Room:
         return up, down, left, right, doors
 
     def draw_doors(self, matrix):
-        amt = random.choices([2,3],[2,1])[0]
+        amt = random.choices([2, 3], [2, 1])[0]
 
         *sides, doors = self.find_neighbors(matrix)
         amt -= len(doors)
@@ -179,7 +179,7 @@ class Room:
                 else:
                     matrix[y, x] = 3
 
-        if self.type in ['start','end','chest']:
+        if self.type in ['start', 'end', 'chest']:
             x = random.choice(floorx)
             y = random.choice(floory)
 
@@ -189,16 +189,22 @@ class Room:
                 x = random.choice(floorx)
                 y = random.choice(floory)
 
-                if matrix[y,x] in [2,3]:
+                if matrix[y, x] in [2, 3]:
                     matrix[y, x] = self.types[item]
 
-        amt_mobs = self.size//8 if self.size >=8 else 1
-        while amt_mobs != 0:
-            x = random.choice(floorx)
-            y = random.choice(floory)
+        amt_mobs = None
+        if self.type == 'normal':
+            amt_mobs = self.size // 8 if self.size >= 8 else 1
+        elif self.type == 'chest':
+            amt_mobs = self.size // 4 if self.size >= 4 else 2
 
-            if matrix[y, x] in [2, 3]:
-                matrix[y, x] = self.types['mob']
-                amt_mobs -= 1
+        if amt_mobs is not None:
+            while amt_mobs != 0:
+                x = random.choice(floorx)
+                y = random.choice(floory)
+
+                if matrix[y, x] in [2, 3]:
+                    matrix[y, x] = self.types['mob']
+                    amt_mobs -= 1
 
         return matrix

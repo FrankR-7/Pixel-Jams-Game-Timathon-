@@ -49,7 +49,6 @@ def generate_rooms(act):
 
 generate_rooms(room)
 
-
 # -------- STAGE 2 and 3 (combined for performance) -----------
 
 # Room selection
@@ -114,7 +113,6 @@ for hall in halls:
 for hall in halls:  # again
     if len(hall.meta):
         map = hall.generate_hall_2(map.copy())
-
 
 # ------ Debugging ------
 if debug == '1':

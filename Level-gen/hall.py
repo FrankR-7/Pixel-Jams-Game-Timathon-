@@ -5,6 +5,7 @@ from pathfinding.core.heuristic import manhatten
 from pathfinding.finder.best_first import BestFirst
 import numpy as np
 
+
 class Hall:
     def __init__(self, x_1, y_1, x_2, y_2):
         self.x1, self.y1 = x_1, y_1
@@ -38,7 +39,7 @@ class Hall:
             mini = np.negative(matrix.copy()).tolist()
             for s, y in enumerate(mini):
                 for t, x in enumerate(y):
-                    if mini[s][t]==0 or mini[s][t]==-4:
+                    if mini[s][t] == 0 or mini[s][t] == -4:
                         mini[s][t] = 1
 
             grid = Grid(matrix=mini)
@@ -73,11 +74,12 @@ class Hall:
                     for y in [c, d]:
                         if matrix[y, x] == 0:
                             matrix[y, x] = 1
-            except: pass
+            except:
+                pass
 
         if self.type == 'normal':
             for l in self.meta:
-                addwalls(l[1],l[0])
+                addwalls(l[1], l[0])
 
         return matrix
 
