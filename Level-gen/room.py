@@ -16,7 +16,9 @@ class Room:
             'strength': 9,
             'heal': 10,
             'invisible': 11,
-            'dew': 12
+            'dew': 12,
+            'mob': 13,
+            'key': 14
         }
         self.items = []
         self.state = False
@@ -189,5 +191,14 @@ class Room:
 
                 if matrix[y,x] in [2,3]:
                     matrix[y, x] = self.types[item]
+
+        amt_mobs = self.size//8 if self.size >=8 else 1
+        while amt_mobs != 0:
+            x = random.choice(floorx)
+            y = random.choice(floory)
+
+            if matrix[y, x] in [2, 3]:
+                matrix[y, x] = self.types['mob']
+                amt_mobs -= 1
 
         return matrix

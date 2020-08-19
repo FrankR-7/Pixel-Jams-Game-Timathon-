@@ -62,15 +62,20 @@ start.type = 'start'
 
 while True:
     end = random.choice(normal_rooms)
-    if not end.type == 'start':
+    if end.type == 'normal':
         end.type = 'end'
         break
 
 if random.choices([True, False], [1, 49])[0]:  # 1 in 50 chance of getting a chest room
     while True:
         chest = random.choice(normal_rooms)
-        if not chest.type == 'start' or chest.type == 'end':
+        if chest.type == 'normal':
             chest.type = 'chest'
+            break
+    while True:
+        key = random.choice(normal_rooms)
+        if key.type == 'normal':
+            key.items.append('key')
             break
 
 # Item distribution
@@ -116,7 +121,7 @@ if debug == '1':
     plt.xticks([])
     plt.yticks([])
     plt.imshow(map)
-    plt.colorbar(ticks=[i for i in range(13)])
+    plt.colorbar(ticks=[i for i in range(15)])
     plt.show()
 elif debug == '2':
     print(map)
