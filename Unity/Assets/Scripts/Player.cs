@@ -14,8 +14,10 @@ public class Player : MonoBehaviour
     void Awake()
     {
         _controller = GetComponent<CharacterController>();
+
         Enemy1.player = transform;
         Door.entities.Add(transform);
+        CameraMovement.target = transform;
     }
 
     
