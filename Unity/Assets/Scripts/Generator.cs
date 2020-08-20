@@ -13,8 +13,8 @@ public class Generator : MonoBehaviour
     public GameObject grass;
     public GameObject door;
     public GameObject parent;
-    public GameObject player;
     public GameObject enemy1;
+    public Transform player;
 
     public static float size = 2.5f;
     private int m = 20, n = 20;
@@ -144,7 +144,7 @@ public class Generator : MonoBehaviour
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
 
-        GameObject p = Instantiate(player, new Vector3(x * size, size, i * size), Quaternion.identity);
+        //player.position = block.transform.position + new Vector3(0,player.localScale.y,0);
     }
 
     private void CreateEnd(int i, int x)
