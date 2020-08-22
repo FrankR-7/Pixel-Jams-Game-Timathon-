@@ -9,19 +9,30 @@ using UnityEngine.AI;
 public class Generator : MonoBehaviour
 {
     public GameObject floor;
+    public GameObject end;
     public GameObject wall;
     public GameObject grass;
     public GameObject door;
     public GameObject parent;
     public GameObject enemy1;
-    public Transform player;
+    public GameObject player;
+    public GameObject chest;
+    public GameObject str_potion;
+    public GameObject invisib_potion;
+    public GameObject heal_potion;
+    public GameObject dewflask;
+    public GameObject scrap;
+    public GameObject key;
 
     public static float size = 2.5f;
-    private int m = 20, n = 20;
+    private int m, n;
 
     void Start()
     {
-        Process p = Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Level Generation", "level-gen.exe"), m.ToString()+" "+n.ToString());
+        m = 30 + (Player.level - 1) * 2;
+        n = 30 + (Player.level - 1) * 2;
+
+        Process p = Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Resources", "level-gen.exe"), m.ToString()+" "+n.ToString());
         p.StartInfo.UseShellExecute = false;
         p.StartInfo.CreateNoWindow = true;
         p.StartInfo.RedirectStandardOutput = true;
@@ -102,7 +113,7 @@ public class Generator : MonoBehaviour
     {
         for (int j = 1; j <= 3; ++j)
         {
-            GameObject block = Instantiate(wall, new Vector3(x * size, j*size, i * size), Quaternion.identity);
+            GameObject block = Instantiate(wall, new Vector3(x * size, j * size, i * size), Quaternion.identity);
             block.isStatic = true;
             block.transform.localScale = new Vector3(size, size, size);
             block.transform.SetParent(parent.transform);
@@ -144,13 +155,13 @@ public class Generator : MonoBehaviour
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
 
-        //player.position = block.transform.position + new Vector3(0,player.localScale.y,0);
+        Instantiate(player, new Vector3(x * size, size, i * size), Quaternion.identity);
     }
 
     private void CreateEnd(int i, int x)
     {
         //For now just spawns a block of floor, will have to work on after we make prefabs
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
+        GameObject block = Instantiate(end, new Vector3(x * size, size, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
@@ -158,56 +169,76 @@ public class Generator : MonoBehaviour
 
     private void CreateChest(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
+
+        GameObject go = Instantiate(chest, new Vector3(x * size, size, i * size), Quaternion.identity);
+        go.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        go.transform.SetParent(parent.transform);
     }
 
     private void CreateScrap(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
+
+        GameObject go = Instantiate(scrap, new Vector3(x * size, size, i * size), Quaternion.identity);
+        go.transform.localScale = new Vector3(7f, 7f, 7f);
+        go.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        go.transform.SetParent(parent.transform);
     }
 
     private void CreateStrengthPotion(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
+
+        GameObject go = Instantiate(str_potion, new Vector3(x * size, size, i * size), Quaternion.identity);
+        go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        go.transform.SetParent(parent.transform);
     }
 
     private void CreateHealPotion(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
+
+        GameObject go = Instantiate(heal_potion, new Vector3(x * size, size, i * size), Quaternion.identity);
+        go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        go.transform.SetParent(parent.transform);
     }
 
     private void CreateInvisibilityPotion(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
+
+        GameObject go = Instantiate(invisib_potion, new Vector3(x * size, size, i * size), Quaternion.identity);
+        go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        go.transform.SetParent(parent.transform);
     }
 
     private void CreateDewFlask(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
+
+        GameObject go = Instantiate(dewflask, new Vector3(x * size, size, i * size), Quaternion.identity);
+        go.transform.localScale = new Vector3(7f, 7f, 7f);
+        go.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        go.transform.SetParent(parent.transform);
     }
 
     private void CreateMob(int i, int x)
@@ -218,14 +249,18 @@ public class Generator : MonoBehaviour
         block.transform.SetParent(parent.transform);
 
         GameObject e = Instantiate(enemy1, new Vector3(x * size, size, i * size), Quaternion.identity);
+        e.transform.SetParent(parent.transform);
     }
 
     private void CreateChestKey(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
+
+        GameObject go = Instantiate(key, new Vector3(x * size, size, i * size), Quaternion.identity);
+        go.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        go.transform.SetParent(parent.transform);
     }
 }
