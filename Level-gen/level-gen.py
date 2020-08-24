@@ -65,7 +65,7 @@ while True:
         end.type = 'end'
         break
 
-if random.choices([True, False], [1, 49])[0]:  # 1 in 50 chance of getting a chest room
+if random.choices([True, False], [1, 24])[0]:  # 1 in 25 chance of getting a chest room
     while True:
         chest = random.choice(normal_rooms)
         if chest.type == 'normal':
