@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
     public Text level;
+    public Text key;
     public Slider healthbar;
     public GameObject loading_screen;
     public Text loading;
@@ -17,6 +18,7 @@ public class UI_Manager : MonoBehaviour
     void Start()
     {
         level.text = Player.level.ToString();
+        key.text = Player.keys.ToString();
     }
 
     // Update is called once per frame

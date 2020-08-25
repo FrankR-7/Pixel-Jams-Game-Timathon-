@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public static int max_health=100;
     public static int health=100;
     public static int attack=50;
+    public static int keys = 0;
+    public static Dictionary<Item.ItemType, int> inv = new Dictionary<Item.ItemType, int>();
     //add inventory here
 
     void Start()
@@ -69,20 +71,34 @@ public class Player : MonoBehaviour
         //Checking if gameobject we collided with is an item
         if (hit.gameObject.GetComponent<Item>() != null)
         {
-            /*
-             * Each item is given an ID which is assigned to it in its respective Gameobject
-             * ID - Item
-             *  0 - Chest
-             *  1 - Scrap
-             *  2 - Strength Potion
-             *  3 - Heal Potion
-             *  4 - Invisibility Potion
-             *  5 - Dew Flask
-             *  6 - Chest Key
-             */
-            int type = hit.gameObject.GetComponent<Item>().ID;
+            Item.ItemType type = hit.gameObject.GetComponent<Item>().type;
+            if (type == Item.ItemType.Key)
+                ++keys;
+            else if (type == Item.ItemType.Chest)
+            {
+                if (keys > 0)
+                {
+                    --keys;
+                }
+                else
+                    return;
+            }
+            else
+            {
+                if (inv.ContainsKey(type))
+                    ++inv[type];
+                else
+                    inv[type] = 0;
 
-            //Code to add object to inventory should be added here
+                if (type == Item.ItemType.Scrap && inv[type] == 4)
+                {
+                    inv.Remove(type);
+                    if (inv.ContainsKey(Item.ItemType.AttackScroll))
+                        ++inv[Item.ItemType.AttackScroll];
+                    else
+                        inv[Item.ItemType.AttackScroll] = 0;
+                }
+            }
 
             Destroy(hit.gameObject);
         }

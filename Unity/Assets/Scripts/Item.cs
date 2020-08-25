@@ -5,13 +5,24 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public enum ItemType{
+        Chest,
+        Key,
+        StrengthPotion,
+        InvisibilityPotion,
+        HealPotion,
+        DewFlask,
+        Scrap,
+        AttackScroll
+    };
+
     private Vector3 init_position;
     private Vector3 up;
     private Vector3 down;
     private int alt;
     private float speed = 0.5f;
     private int rot_speed = 40;
-    [SerializeField] public int ID;
+    [SerializeField] public ItemType type;
 
     void Start()
     {
@@ -23,7 +34,7 @@ public class Item : MonoBehaviour
 
     void Update()
     {
-        if (ID != 0) //Don't want chest to rotate and move up and down
+        if (type != ItemType.Chest) //Don't want chest to rotate and move up and down
         {
             if (transform.position == up || transform.position == down)
                 alt *= -1;
