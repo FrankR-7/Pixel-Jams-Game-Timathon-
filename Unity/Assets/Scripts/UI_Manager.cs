@@ -76,25 +76,31 @@ public class UI_Manager : MonoBehaviour
             {
             case Item.ItemType.StrengthPotion:
                 go.transform.GetChild(0).GetComponent<Image>().sprite = img_strengthpotion;
+                go.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(30f, 54.76f);
                 break;
             case Item.ItemType.HealPotion:
                 go.transform.GetChild(0).GetComponent<Image>().sprite = img_healthpotion;
-                break;
+                go.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(30f, 54.76f);
+                    break;
             case Item.ItemType.InvisibilityPotion:
                 go.transform.GetChild(0).GetComponent<Image>().sprite = img_invisibpotion;
-                break;
+                go.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(30f, 54.76f);
+                    break;
             case Item.ItemType.DewFlask:
                 go.transform.GetChild(0).GetComponent<Image>().sprite = img_dewflask;
+                go.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(17f, 53.5f);
                 break;
             case Item.ItemType.Scrap:
                 go.transform.GetChild(0).GetComponent<Image>().sprite = img_scrap;
+                go.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(21f, 24f);
                 break;
             case Item.ItemType.AttackScroll:
                 go.transform.GetChild(0).GetComponent<Image>().sprite = img_scroll;
+                go.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(44.85f, 55.6f);
                 break;
             }
 
-            go.GetComponent<RectTransform>().anchoredPosition = new Vector2(-193.2f + x * size, 28f + y * size);
+            go.GetComponent<RectTransform>().anchoredPosition = new Vector2(-193.2f + x * size, 28f + y * size / 1.5f);
             ++x;
             if (x==4)
             {
