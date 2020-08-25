@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class Menu_Manager : MonoBehaviour
 
     public GameObject loading_screen;
     public Text loading;
+    public Text tip;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +37,13 @@ public class Menu_Manager : MonoBehaviour
         Door.entities = new List<Transform>();
         Enemy1.player = null;
         CameraMovement.target = null;
+
         loading.text = "Generating and Loading Level " + Player.level.ToString();
+        System.Random rand = new System.Random();
+        string[] tips = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Resources", "tips.txt"));
+        tip.text = "Tip: " + tips[rand.Next(tips.Length)];
         loading_screen.SetActive(true);
+
         SceneManager.LoadScene(1);
     }
 }
