@@ -13,6 +13,17 @@ public class UI_Manager : MonoBehaviour
     public GameObject loading_screen;
     public Text loading;
     public Text tip;
+    public GameObject inventorybar;
+
+    public Sprite img_strengthpotion;
+    public Sprite img_healthpotion;
+    public Sprite img_invisibpotion;
+    public Sprite img_dewflask;
+    public Sprite img_scrap;
+    public Sprite img_scroll;
+
+    public GameObject itemcontainer;
+    private List<GameObject> items = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +38,17 @@ public class UI_Manager : MonoBehaviour
         healthbar.value = Player.health / Player.max_health;
     }
 
+    public void ToggleInventory()
+    {
+        if (inventorybar.activeSelf)
+            inventorybar.SetActive(false);
+        else
+        {
+            RefreshInv();
+            inventorybar.SetActive(true);
+        }
+    }
+
     public void Trigger_Loading()
     {
         loading.text = "Generating and Loading Level " + Player.level.ToString();
@@ -34,5 +56,56 @@ public class UI_Manager : MonoBehaviour
         string[] tips = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Resources", "tips.txt"));
         tip.text = "Tip: " + tips[rand.Next(tips.Length)];
         loading_screen.SetActive(true);
+    }
+
+    public void RefreshInv()
+    {
+        foreach (GameObject go in items)
+        {
+            Destroy(go);
+        }
+        items = new List<GameObject>();
+
+        int x = 0, y = 0;
+        float size = 130f;
+        foreach (KeyValuePair<Item.ItemType, int> kvp in Player.inv)
+        {
+            GameObject go = Instantiate(itemcontainer.transform, inventorybar.transform).gameObject;
+
+            switch (kvp.Key)
+            {
+            case Item.ItemType.StrengthPotion:
+                go.transform.GetChild(0).GetComponent<Image>().sprite = img_strengthpotion;
+                break;
+            case Item.ItemType.HealPotion:
+                go.transform.GetChild(0).GetComponent<Image>().sprite = img_healthpotion;
+                break;
+            case Item.ItemType.InvisibilityPotion:
+                go.transform.GetChild(0).GetComponent<Image>().sprite = img_invisibpotion;
+                break;
+            case Item.ItemType.DewFlask:
+                go.transform.GetChild(0).GetComponent<Image>().sprite = img_dewflask;
+                break;
+            case Item.ItemType.Scrap:
+                go.transform.GetChild(0).GetComponent<Image>().sprite = img_scrap;
+                break;
+            case Item.ItemType.AttackScroll:
+                go.transform.GetChild(0).GetComponent<Image>().sprite = img_scroll;
+                break;
+            }
+
+            go.GetComponent<RectTransform>().anchoredPosition = new Vector2(-193.2f + x * size, 28f + y * size);
+            ++x;
+            if (x==4)
+            {
+                x = 0;
+                --y;
+            }
+
+            go.transform.GetChild(1).GetComponent<Text>().text = kvp.Value > 1 ? kvp.Value.ToString() : "";
+
+            items.Add(go);
+            go.SetActive(true);
+        }
     }
 }

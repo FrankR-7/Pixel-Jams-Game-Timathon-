@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
                 if (inv.ContainsKey(type))
                     ++inv[type];
                 else
-                    inv[type] = 0;
+                    inv[type] = 1;
 
                 if (type == Item.ItemType.Scrap && inv[type] == 4)
                 {
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
                     if (inv.ContainsKey(Item.ItemType.AttackScroll))
                         ++inv[Item.ItemType.AttackScroll];
                     else
-                        inv[Item.ItemType.AttackScroll] = 0;
+                        inv[Item.ItemType.AttackScroll] = 1;
                 }
             }
 
