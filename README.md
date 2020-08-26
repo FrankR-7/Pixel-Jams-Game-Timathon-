@@ -63,4 +63,6 @@ interprets it.
 `30 30 1`, for example: `python level-gen.py 30 30 1`.***
 
 ## Thanks for reading! Enjoy the game and give us a vote!
+Made with love by the Pixel Jam team <3
+![Pixel Jam Logo](Annex/logo.png)
 
