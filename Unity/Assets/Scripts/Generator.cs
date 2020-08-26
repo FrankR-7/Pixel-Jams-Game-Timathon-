@@ -160,7 +160,6 @@ public class Generator : MonoBehaviour
 
     private void CreateEnd(int i, int x)
     {
-        //For now just spawns a block of floor, will have to work on after we make prefabs
         GameObject block = Instantiate(end, new Vector3(x * size, size, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
@@ -248,8 +247,8 @@ public class Generator : MonoBehaviour
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
 
-        //GameObject e = Instantiate(enemy1, new Vector3(x * size, size, i * size), Quaternion.identity);
-        //e.transform.SetParent(parent.transform);
+        GameObject e = Instantiate(enemy1, new Vector3(x * size, size, i * size), Quaternion.identity);
+        e.transform.SetParent(parent.transform);
     }
 
     private void CreateChestKey(int i, int x)
