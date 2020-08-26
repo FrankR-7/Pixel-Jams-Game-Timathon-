@@ -156,6 +156,8 @@ public class Player : MonoBehaviour
                     else
                         inv[Item.ItemType.AttackScroll] = 1;
                 }
+
+                GameObject.FindObjectOfType<UI_Manager>().RefreshInv();
             }
 
             Destroy(hit.gameObject);

@@ -11,17 +11,7 @@ public class Generator_menu : MonoBehaviour
     public GameObject floor;
     public GameObject wall;
     public GameObject grass;
-    public GameObject door;
     public GameObject parent;
-    public GameObject enemy1;
-    public GameObject player;
-    public GameObject chest;
-    public GameObject str_potion;
-    public GameObject invisib_potion;
-    public GameObject heal_potion;
-    public GameObject dewflask;
-    public GameObject scrap;
-    public GameObject key;
 
     public static float size = 2.5f;
     private int m = 40, n = 40;
@@ -58,46 +48,22 @@ public class Generator_menu : MonoBehaviour
                     case 1:
                         CreateWall(i, x);
                         break;
-                    case 2:
-                        CreateFloor(i, x);
-                        break;
                     case 3:
                         CreateGrass(i, x);
                         break;
+                    case 2:                      
                     case 4:
-                        CreateDoor(i, x);
-                        break;
                     case 5:
-                        CreateStart(i, x);
-                        break;
                     case 6:
-                        CreateEnd(i, x);
-                        break;
                     case 7:
-                        CreateChest(i, x);
-                        break;
-                    case 8:
-                        CreateScrap(i, x);
-                        break;
+                    case 8:    
                     case 9:
-                        CreateStrengthPotion(i, x);
-                        break;
                     case 10:
-                        CreateHealPotion(i, x);
-                        break;
                     case 11:
-                        CreateInvisibilityPotion(i, x);
-                        break;
                     case 12:
-                        CreateDewFlask(i, x);
-                        break;
                     case 13:
-                        CreateMob(i, x);
-                        break;
                     case 14:
-                        CreateChestKey(i, x);
-                        break;
-                    default:
+                        CreateFloor(i, x);
                         break;
                 }
             }
@@ -129,137 +95,5 @@ public class Generator_menu : MonoBehaviour
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
-    }
-
-    private void CreateDoor(int i, int x)
-    {
-        GameObject block1 = Instantiate(wall, new Vector3(x * size, 3*size, i * size), Quaternion.identity);
-        block1.isStatic = true;
-        block1.transform.localScale = new Vector3(size, size, size);
-        block1.transform.SetParent(parent.transform);
-
-        GameObject block2 = Instantiate(door, new Vector3(x * size, 3 * size / 2, i * size), Quaternion.identity);
-        block2.GetComponent<Door>().enabled = false;
-        block2.transform.localScale = new Vector3(size, 2*size, size);
-        block2.transform.SetParent(parent.transform);
-    }
-
-    private void CreateStart(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject p = Instantiate(player, new Vector3(x * size, size, i * size), Quaternion.identity);
-        p.GetComponent<Player>().enabled = false;
-        p.transform.SetParent(parent.transform);
-    }
-
-    private void CreateEnd(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-    }
-
-    private void CreateChest(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject go = Instantiate(chest, new Vector3(x * size, size, i * size), Quaternion.identity);
-        go.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        go.transform.SetParent(parent.transform);
-    }
-
-    private void CreateScrap(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject go = Instantiate(scrap, new Vector3(x * size, size, i * size), Quaternion.identity);
-        go.transform.localScale = new Vector3(7f, 7f, 7f);
-        go.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-        go.transform.SetParent(parent.transform);
-    }
-
-    private void CreateStrengthPotion(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject go = Instantiate(str_potion, new Vector3(x * size, size, i * size), Quaternion.identity);
-        go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        go.transform.SetParent(parent.transform);
-    }
-
-    private void CreateHealPotion(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject go = Instantiate(heal_potion, new Vector3(x * size, size, i * size), Quaternion.identity);
-        go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        go.transform.SetParent(parent.transform);
-    }
-
-    private void CreateInvisibilityPotion(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject go = Instantiate(invisib_potion, new Vector3(x * size, size, i * size), Quaternion.identity);
-        go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        go.transform.SetParent(parent.transform);
-    }
-
-    private void CreateDewFlask(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject go = Instantiate(dewflask, new Vector3(x * size, size, i * size), Quaternion.identity);
-        go.transform.localScale = new Vector3(7f, 7f, 7f);
-        go.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
-        go.transform.SetParent(parent.transform);
-    }
-
-    private void CreateMob(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject e = Instantiate(enemy1, new Vector3(x * size, size, i * size), Quaternion.identity);
-        e.GetComponent<Enemy1>().enabled = false;
-        e.GetComponent<NavMeshAgent>().enabled = false;
-        e.transform.SetParent(parent.transform);
-    }
-
-    private void CreateChestKey(int i, int x)
-    {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
-        block.isStatic = true;
-        block.transform.localScale = new Vector3(size, size, size);
-        block.transform.SetParent(parent.transform);
-
-        GameObject go = Instantiate(key, new Vector3(x * size, size, i * size), Quaternion.identity);
-        go.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-        go.transform.SetParent(parent.transform);
     }
 }

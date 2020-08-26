@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
@@ -14,6 +15,7 @@ public class UI_Manager : MonoBehaviour
     public Text loading;
     public Text tip;
     public GameObject inventorybar;
+    public GameObject exitbar;
 
     public Sprite img_strengthpotion;
     public Sprite img_healthpotion;
@@ -25,9 +27,15 @@ public class UI_Manager : MonoBehaviour
     public GameObject itemcontainer;
     private List<GameObject> items = new List<GameObject>();
 
+    private bool inExit;
+    private bool inInv;
+
     // Start is called before the first frame update
     void Start()
     {
+        inExit = false;
+        inInv = false;
+            
         level.text = Player.level.ToString();
         key.text = Player.keys.ToString();
     }
@@ -41,12 +49,40 @@ public class UI_Manager : MonoBehaviour
     public void ToggleInventory()
     {
         if (inventorybar.activeSelf)
-            inventorybar.SetActive(false);
-        else
         {
+            inInv = false;
+            inventorybar.SetActive(false);
+        }
+        else if (!inExit)
+        {
+            inInv = true;
             RefreshInv();
             inventorybar.SetActive(true);
         }
+    }
+
+    public void ToggleExit()
+    {
+        if (exitbar.activeSelf)
+        {
+            inExit = false;
+            exitbar.SetActive(false);
+        }
+        else if (!inInv)
+        {
+            inExit = true;
+            exitbar.SetActive(true);
+        }
+    }
+
+    public void Exit()
+    {
+        loading.text = "Loading Menu...";
+        System.Random rand = new System.Random();
+        string[] tips = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Resources", "tips.txt"));
+        tip.text = "Tip: " + tips[rand.Next(tips.Length)];
+        loading_screen.SetActive(true);
+        SceneManager.LoadScene(0);
     }
 
     public void Trigger_Loading()
