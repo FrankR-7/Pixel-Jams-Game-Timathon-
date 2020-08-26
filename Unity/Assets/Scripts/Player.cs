@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -38,7 +39,6 @@ public class Player : MonoBehaviour
         Door.entities.Add(transform);
         CameraMovement.target = transform;
     }
-
     
     void Update()
     {
@@ -83,36 +83,36 @@ public class Player : MonoBehaviour
         bool used = true;
         switch (item)
         {
-        case Item.ItemType.StrengthPotion:
-            max_health += 20;
-            break;
-        case Item.ItemType.HealPotion:
-            if (health != max_health)
-                health = max_health;
-            else
-                used = false;
-            break;
-        case Item.ItemType.InvisibilityPotion:
-            if (!isInvisible)
-            {
-                isInvisible = true;
-                nextNotInvisible = Time.time + 15f; //Invisible for 15 seconds
-            }
-            else
-                used = false;
-            break;
-        case Item.ItemType.DewFlask:
-            if (!isDewed)
-            {
-                isDewed = true;
-                nextNotDewed = health + max_health * 20 / 100; //Refills 20% of health
-            }
-            else
-                used = false;
-            break;
-        case Item.ItemType.AttackScroll:
-            attack += 30;
-            break;
+            case Item.ItemType.StrengthPotion:
+                max_health += 20;
+                break;
+            case Item.ItemType.HealPotion:
+                if (health != max_health)
+                    health = max_health;
+                else
+                    used = false;
+                break;
+            case Item.ItemType.InvisibilityPotion:
+                if (!isInvisible)
+                {
+                    isInvisible = true;
+                    nextNotInvisible = Time.time + 15f; //Invisible for 15 seconds
+                }
+                else
+                    used = false;
+                break;
+            case Item.ItemType.DewFlask:
+                if (!isDewed)
+                {
+                    isDewed = true;
+                    nextNotDewed = health + max_health * 20 / 100; //Refills 20% of health
+                }
+                else
+                    used = false;
+                break;
+            case Item.ItemType.AttackScroll:
+                attack += 30;
+                break;
         }
 
         if (used)
@@ -137,27 +137,38 @@ public class Player : MonoBehaviour
                 if (keys > 0)
                 {
                     --keys;
+                    System.Random rand = new System.Random();
+                    for (int i = 0; i < 3; ++i)
+                    {
+                        switch (rand.Next(6))
+                        {
+                            case 0:
+                                AddItem(Item.ItemType.StrengthPotion);
+                                break;
+                            case 1:
+                                AddItem(Item.ItemType.InvisibilityPotion);
+                                break;
+                            case 2:
+                                AddItem(Item.ItemType.HealPotion);
+                                break;
+                            case 3:
+                                AddItem(Item.ItemType.DewFlask);
+                                break;
+                            case 4:
+                                AddItem(Item.ItemType.Scrap);
+                                break;
+                            case 5:
+                                AddItem(Item.ItemType.AttackScroll);
+                                break;
+                        }
+                    }
                 }
                 else
                     return;
             }
             else
             {
-                if (inv.ContainsKey(type))
-                    ++inv[type];
-                else
-                    inv[type] = 1;
-
-                if (type == Item.ItemType.Scrap && inv[type] == 4)
-                {
-                    inv.Remove(type);
-                    if (inv.ContainsKey(Item.ItemType.AttackScroll))
-                        ++inv[Item.ItemType.AttackScroll];
-                    else
-                        inv[Item.ItemType.AttackScroll] = 1;
-                }
-
-                GameObject.FindObjectOfType<UI_Manager>().RefreshInv();
+                AddItem(type);
             }
 
             Destroy(hit.gameObject);
@@ -171,5 +182,24 @@ public class Player : MonoBehaviour
             GameObject.FindObjectOfType<UI_Manager>().Trigger_Loading();
             SceneManager.LoadScene(1);
         }
+    }
+
+    private void AddItem(Item.ItemType type)
+    {
+        if (inv.ContainsKey(type))
+            ++inv[type];
+        else
+            inv[type] = 1;
+
+        if (type == Item.ItemType.Scrap && inv[type] == 4)
+        {
+            inv.Remove(type);
+            if (inv.ContainsKey(Item.ItemType.AttackScroll))
+                ++inv[Item.ItemType.AttackScroll];
+            else
+                inv[Item.ItemType.AttackScroll] = 1;
+        }
+
+        GameObject.FindObjectOfType<UI_Manager>().RefreshInv();
     }
 }
