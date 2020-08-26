@@ -23,7 +23,7 @@ items = ['upgrade', 'strength', 'heal', 'invisible', 'dew']
 
 used = {i: 0 for i in items}
 
-amt_items = np.mean(size) // 7
+amt_items = np.mean(size) // 8
 
 max_items = {i: amt_items + random.randrange(-2, 3) for i in items}
 

@@ -194,9 +194,9 @@ class Room:
 
         amt_mobs = None
         if self.type == 'normal':
-            amt_mobs = self.size // 10 if self.size >= 10 else 1
+            amt_mobs = self.size // 12 if self.size >= 12 else 1
         elif self.type == 'chest':
-            amt_mobs = self.size // 7 if self.size >= 7 else 2
+            amt_mobs = self.size // 8 if self.size >= 8 else 2
 
         if amt_mobs is not None:
             while amt_mobs != 0:
