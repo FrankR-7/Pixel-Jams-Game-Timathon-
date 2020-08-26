@@ -24,7 +24,7 @@ public class Enemy1 : MonoBehaviour
         state = 0;
         init_pos = transform.position;
         nav = GetComponent<NavMeshAgent>();
-        nav.speed = 0f;
+        nav.speed = 5f;
 
         Door.entities.Add(transform);
 
@@ -42,8 +42,12 @@ public class Enemy1 : MonoBehaviour
 
         if (player != null && state == 1)
         {
-            nav.speed = 5f;
             nav.SetDestination(player.position);
         }
+
+        if (Player.isInvisible)
+            nav.isStopped = true;
+        else
+            nav.isStopped = false;
     }
 }

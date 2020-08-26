@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,7 +24,10 @@ public class Player : MonoBehaviour
     public static int attack=50;
     public static int keys = 0;
     public static Dictionary<Item.ItemType, int> inv = new Dictionary<Item.ItemType, int>();
-    //add inventory here
+    public static bool isInvisible = false;
+    public static float nextNotInvisible = 0f;
+    public static bool isDewed = false;
+    public static int nextNotDewed = 0;
 
     void Start()
     {
@@ -39,6 +43,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+
+        if (isInvisible && Time.time > nextNotInvisible)
+            isInvisible = false;
+        if (isDewed && (health == max_health || health == nextNotDewed))
+        {
+            health += 1;
+            isDewed = false;
+        }
     }
 
     private void PlayerMovement()
@@ -63,6 +75,52 @@ public class Player : MonoBehaviour
         else
         {
             anim.SetBool("isRunning", false);
+        }
+    }
+
+    public static void UseItem(Item.ItemType item)
+    {
+        bool used = true;
+        switch (item)
+        {
+        case Item.ItemType.StrengthPotion:
+            max_health += 20;
+            break;
+        case Item.ItemType.HealPotion:
+            if (health != max_health)
+                health = max_health;
+            else
+                used = false;
+            break;
+        case Item.ItemType.InvisibilityPotion:
+            if (!isInvisible)
+            {
+                isInvisible = true;
+                nextNotInvisible = Time.time + 15f; //Invisible for 15 seconds
+            }
+            else
+                used = false;
+            break;
+        case Item.ItemType.DewFlask:
+            if (!isDewed)
+            {
+                isDewed = true;
+                nextNotDewed = health + max_health * 20 / 100; //Refills 20% of health
+            }
+            else
+                used = false;
+            break;
+        case Item.ItemType.AttackScroll:
+            attack += 30;
+            break;
+        }
+
+        if (used)
+        {
+            --inv[item];
+            if (inv[item] == 0)
+                inv.Remove(item);
+            GameObject.FindObjectOfType<UI_Manager>().RefreshInv();
         }
     }
 

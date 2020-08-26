@@ -34,6 +34,10 @@ public class Menu_Manager : MonoBehaviour
         Player.attack = 50;
         Player.keys = 0;
         Player.inv = new Dictionary<Item.ItemType, int>();
+        Player.isInvisible = false;
+        Player.nextNotInvisible = 0f;
+        Player.isDewed = false;
+        Player.nextNotDewed = 0;
 
         Door.entities = new List<Transform>();
         Enemy1.player = null;

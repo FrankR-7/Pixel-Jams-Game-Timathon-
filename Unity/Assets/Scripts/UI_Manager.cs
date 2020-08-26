@@ -72,6 +72,9 @@ public class UI_Manager : MonoBehaviour
         {
             GameObject go = Instantiate(itemcontainer.transform, inventorybar.transform).gameObject;
 
+            if (kvp.Key != Item.ItemType.Scrap)
+                go.GetComponent<Button>().onClick.AddListener(delegate { Player.UseItem(kvp.Key); });
+
             switch (kvp.Key)
             {
             case Item.ItemType.StrengthPotion:
