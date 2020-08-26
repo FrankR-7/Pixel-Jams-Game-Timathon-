@@ -178,7 +178,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: d33c2938252327e44b2f02c0ac2c0abc, type: 3}
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
@@ -418,10 +418,10 @@ RectTransform:
   m_Father: {fileID: 1510853074}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 168, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &867346066
 MonoBehaviour:
@@ -443,11 +443,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: d33c2938252327e44b2f02c0ac2c0abc, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -651,7 +651,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: d33c2938252327e44b2f02c0ac2c0abc, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -708,8 +708,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 47}
-  m_SizeDelta: {x: 247.29645, y: 46.368088}
+  m_AnchoredPosition: {x: 0, y: 18}
+  m_SizeDelta: {x: 130.56726, y: 65.28363}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1510853075
 MonoBehaviour:
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9811321, g: 0.124955505, b: 0.124955505, a: 1}
+    m_HighlightedColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -778,14 +778,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9339623, g: 0.2511125, b: 0.2511125, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 086bbf3d59b8a8c4b8d1bfb5aef619ec, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -834,21 +834,7 @@ MonoBehaviour:
   floor: {fileID: 8781437026553081261, guid: 507ecc0b5361caf48a168a89bd54826b, type: 3}
   wall: {fileID: 8781437026553081261, guid: 6db4f20d28a766e46a346c3e5a15af86, type: 3}
   grass: {fileID: 8781437026553081261, guid: 06077f8a925f62a4b9f485aa2a01633e, type: 3}
-  door: {fileID: 8781437026553081261, guid: 981cd8eb4ad7adf4fa20145a896fce56, type: 3}
   parent: {fileID: 1250282112}
-  enemy1: {fileID: 4709687677885672390, guid: 8b01e722040351b409af1f2895a02485, type: 3}
-  player: {fileID: 8804676264348985354, guid: 46529eb72c6dc344d9d3cbdfd639460a, type: 3}
-  chest: {fileID: 9013092366029344638, guid: 465931eb005c7b44b8323b35ffb5c108, type: 3}
-  str_potion: {fileID: 4838853876213360109, guid: 957f4c87b0465a548bed6a7c57d7b387,
-    type: 3}
-  invisib_potion: {fileID: 5824329040684351127, guid: 55e27bd94169ec446afbc77f0a53f358,
-    type: 3}
-  heal_potion: {fileID: 2482375061677796977, guid: 4c87c84965b531c428687a85328c7382,
-    type: 3}
-  dewflask: {fileID: 9023790342190124563, guid: 577eef7398682bd4faebe7559437f9eb,
-    type: 3}
-  scrap: {fileID: 3810866288893907227, guid: b1df53972d6e4c940b82931720905e56, type: 3}
-  key: {fileID: 2125563087673297062, guid: 048f430ec8349744eb500b03db19123f, type: 3}
 --- !u!4 &1738635647
 Transform:
   m_ObjectHideFlags: 0
