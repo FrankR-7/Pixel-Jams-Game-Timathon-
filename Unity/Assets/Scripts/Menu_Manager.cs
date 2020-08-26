@@ -45,7 +45,7 @@ public class Menu_Manager : MonoBehaviour
 
         loading.text = "Generating and Loading Level " + Player.level.ToString();
         System.Random rand = new System.Random();
-        string[] tips = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Resources", "tips.txt"));
+        string[] tips = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "tips.txt"));
         tip.text = "Tip: " + tips[rand.Next(tips.Length)];
         loading_screen.SetActive(true);
 

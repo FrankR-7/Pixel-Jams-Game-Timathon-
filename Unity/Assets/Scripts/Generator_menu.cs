@@ -18,7 +18,7 @@ public class Generator_menu : MonoBehaviour
 
     void Start()
     {
-        Process p = Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Resources", "level-gen.exe"), m.ToString()+" "+n.ToString());
+        Process p = Process.Start(Path.Combine(Application.streamingAssetsPath, "level-gen.exe"), m.ToString()+" "+n.ToString());
         p.StartInfo.UseShellExecute = false;
         p.StartInfo.CreateNoWindow = true;
         p.StartInfo.RedirectStandardOutput = true;

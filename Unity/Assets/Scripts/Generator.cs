@@ -32,7 +32,7 @@ public class Generator : MonoBehaviour
         m = 30 + (Player.level - 1) * 2;
         n = 30 + (Player.level - 1) * 2;
 
-        Process p = Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Resources", "level-gen.exe"), m.ToString()+" "+n.ToString());
+        Process p = Process.Start(Path.Combine(Application.streamingAssetsPath, "level-gen.exe"), m.ToString()+" "+n.ToString());
         p.StartInfo.UseShellExecute = false;
         p.StartInfo.CreateNoWindow = true;
         p.StartInfo.RedirectStandardOutput = true;
