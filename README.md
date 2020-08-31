@@ -17,7 +17,7 @@ every level is procedurally generated! How far can you go?
 - Walk into items or doors to interact with them
 - Click to attack
 - Collect 4 of any ingredient to craft it into a usable item!
-- Find the way to the next level!
+- Find the way to the next level! (Look for the red tile)
 - If you die, you will have to start over from the bottom!
 
 ## Timathon topic: Generate
