@@ -13,6 +13,8 @@ Help Ty find his way around the dungeon in this infinite game where
 every level is procedurally generated! How far can you go?
 
 ## How to play
+**To install, look at your right and find the releases tab and click on Stranded_1.0. Then download the zip in there, unzip it wherever you like and open the exe in there.**
+
 - Use WASD to move
 - Walk into doors to interact with them
 - Find the way to the next level! (Look for the red tile)
