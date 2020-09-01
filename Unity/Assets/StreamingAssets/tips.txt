@@ -1,11 +1,8 @@
 The character's name is Ty
-The bigger a room, the more enemies you will find in it!
-Collect 4 of the same part to craft it into a usable item!
 No matter how much you play, every single level will be completely different!
 Try not to fall into the void!
 This game was made with love by the Pixel Jam team <3
 Have an eye open for secret doors, they can help you a lot!
-There is a tiny chance that a chest room with special loot will spawn!
 Every level you advance becomes bigger and more complex!
 We had a very hard time finding a name for the game :)
 The part that generates the level and distributes the items and enemies is made with Python!
@@ -15,11 +12,4 @@ To advance to the next level, find the red tile and stand on it!
 Consider not leaving the level as soon as you find the exit, there's more loot out there!
 We took lots of inspiration from Pixel Dungeon and Minecraft!
 Vote for us in the Timathon!
-The enemies get stronger with each level you advance!
-Drink from dew flasks to recover small portions of your hp!
-The scroll of upgrade upgrades your sword!
-The potion of strength gives you a higher hp!
-A heal potion completely recovers your health!
-To open a chest, you must first find its key!
-Beware of enemies!
 All of the code this game is made of was written by us!
