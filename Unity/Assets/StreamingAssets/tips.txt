@@ -11,7 +11,7 @@ We had a very hard time finding a name for the game :)
 The part that generates the level and distributes the items and enemies is made with Python!
 If you die, you have to start over from the beginning!
 How far can you go?
-To advance to the next level, find the end pedestal and stand on it!
+To advance to the next level, find the red tile and stand on it!
 Consider not leaving the level as soon as you find the exit, there's more loot out there!
 We took lots of inspiration from Pixel Dungeon and Minecraft!
 Vote for us in the Timathon!
