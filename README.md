@@ -5,25 +5,23 @@
 
 ## As the story goes...
 
-Ty had just woken up in a strange place... He was alone (actually not) and he had his wooden sword to defend himself.
+Ty had just woken up in a strange place... He was alone.
 He had to get out of this place, this underground **dungeon**, so he had to explore all around it and find the way out of it...
 or at least the way to go closer to ground level.
 
-Help Ty find his way around the dungeon, collect ingredients, craft items and fight enemies in this infinite game where
+Help Ty find his way around the dungeon in this infinite game where
 every level is procedurally generated! How far can you go?
 
 ## How to play
 - Use WASD to move
-- Walk into items or doors to interact with them
-- Click to attack
-- Collect 4 of any ingredient to craft it into a usable item!
+- Walk into doors to interact with them
 - Find the way to the next level! (Look for the red tile)
 - If you die, you will have to start over from the bottom!
 
 ## Timathon topic: Generate
 
 In this game, every single level you play (and even the one that appears in the start menu) and the enemy and item
-distribution is made by an original generation algorithm we are very proud of: We call it the **Cell Split Algo**.
+distribution** is made by an original generation algorithm we are very proud of: We call it the **Cell Split Algo**.
 No matter how much you play, every single level will be very different!
 It's written in Python and you can see it's source code in the *Level-gen* folder in this repo, although what the game
 actually uses is a compiled executable from this source code found in *Unity/Assets/StreamingAssets/level-gen.exe*
@@ -58,9 +56,9 @@ teaching a computer to connect dots, but with some help we did it.
 include start, end, and chest rooms for the normal rooms and void halls for the halls. This will affect the way in which
 they generate all of their inner loot and mobs.
 - Now we have to distribute the items throughout the whole level. The amount of items that will spawn in each level is
-defined by the mean of the level's dimensions plus a slight random bias to spawn more or less.
+defined by the mean of the level's dimensions plus a slight random bias to spawn more or less.**
 - To end, we call a fill() method on every single room, and they fill themselves according to the type and items
-assigned to them. In this step, every room also generates the mobs it will have inside based on the area of each room.
+assigned to them. In this step, every room also generates the mobs** it will have inside based on the area of each room.
 The finished map looks pretty much like this: (Each different color represents a different type of block/item placed)
 
 ![Finished Map](Annex/lvl-4.png)
@@ -68,6 +66,8 @@ The finished map looks pretty much like this: (Each different color represents a
 interprets it to make a playable level. The game also adds sprites for the enemies, items, doors and Ty and 
 they all have a mind of their own. If you can make Ty arrive to the exit, the game will call this script again to generate
 a whole new level.
+
+** = These features were on the beta of the game but weren't stable enough for the alpha build so for now they're on hold. Stay tuned for the next code jam!
 
 ***You can replicate the last image we show here by running the level-gen.py script from command line with 
 `python3 level-gen.py 30 30 1`. (Also remember to install the required packages with `pip3 install -r requirements.txt`)***
