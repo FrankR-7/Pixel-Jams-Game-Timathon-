@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public GameObject mesh;
+    //public GameObject mesh;
     private float horizontal;
     private float vertical;
     private CharacterController _controller;
@@ -17,55 +19,90 @@ public class Player : MonoBehaviour
     [SerializeField] private float gravityScale;
 
     private Animator anim;
+    [SerializeField] private float cdr = 1;
+    private float FireStartTime = 0;
 
     //Player data which is going to be saved
-    public static int level=1;
-    public static int max_health=100;
-    public static int health=100;
-    public static int attack=50;
-    public static int keys = 0;
-    public static Dictionary<Item.ItemType, int> inv = new Dictionary<Item.ItemType, int>();
-    public static bool isInvisible = false;
-    public static float nextNotInvisible = 0f;
-    public static bool isDewed = false;
-    public static int nextNotDewed = 0;
+    public int level=1;
+    public int attack=50;
+    public int keys = 0;
+    public Dictionary<Item.ItemType, int> inv = new Dictionary<Item.ItemType, int>();
+    public bool isInvisible = false;
+    public float nextNotInvisible = 0f;
+    public bool isDewed = false;
+    public int nextNotDewed = 0;
+    
+    private HealthSystem Health;
+    private bool invulnerable;
+    private float invulTime = 0.25f;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
-        anim = mesh.GetComponent<Animator>();
-
-        Enemy1.player = transform;
+        anim = GetComponent<Animator>();
         Door.entities.Add(transform);
-        CameraMovement.target = transform;
+        Enemy1.player = transform;
+        Health = new HealthSystem(100);
     }
-    
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        switch (hit.transform.tag)
+        {
+            case "Enemy":
+                if (!invulnerable)
+                {
+                    Health.TakeDamage(5);
+                    print(Health.Health);
+                    StartCoroutine(JustHurt());
+                }
+
+                break;
+        }
+    }
+
+    private IEnumerator JustHurt()
+    {
+        invulnerable = true;
+        yield return new WaitForSeconds(invulTime);
+        invulnerable = false;
+    }
+
     void Update()
     {
         PlayerMovement();
-
+        
+        Click();
+        
         if (isInvisible && Time.time > nextNotInvisible)
             isInvisible = false;
-        if (isDewed && (health == max_health || health == nextNotDewed))
+        //if (isDewed && (health == max_health || health == nextNotDewed))
+        //{
+          //  health += 1;
+            //isDewed = false;
+        //}
+    }
+
+    private void Click()
+    {
+        if (Input.GetMouseButton(0) && Time.time > FireStartTime + cdr)
         {
-            health += 1;
-            isDewed = false;
+            anim.SetTrigger("Slash");
+            FireStartTime = Time.time;
+            print("Slashed!");
         }
     }
+
+    
 
     private void PlayerMovement()
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
-        if (horizontal == 0 && vertical == 0)
-            anim.SetBool("isRunning", false);
-        else
-            anim.SetBool("isRunning", true);
-
-        movement = new Vector3(horizontal * MoveSpeed, movement.y, vertical * MoveSpeed);
-        Vector3 relative = movement + transform.position;
-        _controller.Move(movement * Time.deltaTime);
+        movement = new Vector3(horizontal * MoveSpeed, 0f, vertical * MoveSpeed);
+        _controller.SimpleMove(movement);
+        
 
         if (movement != Vector3.zero)
         {
@@ -76,130 +113,5 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isRunning", false);
         }
-    }
-
-    public static void UseItem(Item.ItemType item)
-    {
-        bool used = true;
-        switch (item)
-        {
-            case Item.ItemType.StrengthPotion:
-                max_health += 20;
-                break;
-            case Item.ItemType.HealPotion:
-                if (health != max_health)
-                    health = max_health;
-                else
-                    used = false;
-                break;
-            case Item.ItemType.InvisibilityPotion:
-                if (!isInvisible)
-                {
-                    isInvisible = true;
-                    nextNotInvisible = Time.time + 15f; //Invisible for 15 seconds
-                }
-                else
-                    used = false;
-                break;
-            case Item.ItemType.DewFlask:
-                if (!isDewed)
-                {
-                    isDewed = true;
-                    nextNotDewed = health + max_health * 20 / 100; //Refills 20% of health
-                }
-                else
-                    used = false;
-                break;
-            case Item.ItemType.AttackScroll:
-                attack += 30;
-                break;
-        }
-
-        if (used)
-        {
-            --inv[item];
-            if (inv[item] == 0)
-                inv.Remove(item);
-            GameObject.FindObjectOfType<UI_Manager>().RefreshInv();
-        }
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        //Checking if gameobject we collided with is an item
-        if (hit.gameObject.GetComponent<Item>() != null)
-        {
-            Item.ItemType type = hit.gameObject.GetComponent<Item>().type;
-            if (type == Item.ItemType.Key)
-                ++keys;
-            else if (type == Item.ItemType.Chest)
-            {
-                if (keys > 0)
-                {
-                    --keys;
-                    System.Random rand = new System.Random();
-                    for (int i = 0; i < 3; ++i)
-                    {
-                        switch (rand.Next(6))
-                        {
-                            case 0:
-                                AddItem(Item.ItemType.StrengthPotion);
-                                break;
-                            case 1:
-                                AddItem(Item.ItemType.InvisibilityPotion);
-                                break;
-                            case 2:
-                                AddItem(Item.ItemType.HealPotion);
-                                break;
-                            case 3:
-                                AddItem(Item.ItemType.DewFlask);
-                                break;
-                            case 4:
-                                AddItem(Item.ItemType.Scrap);
-                                break;
-                            case 5:
-                                AddItem(Item.ItemType.AttackScroll);
-                                break;
-                        }
-                    }
-                }
-                else
-                    return;
-            }
-            else
-            {
-                AddItem(type);
-            }
-
-            Destroy(hit.gameObject);
-        }
-        else if(hit.gameObject.name == "End(Clone)")
-        {
-            ++level;
-            Door.entities = new List<Transform>();
-            Enemy1.player = null;
-            CameraMovement.target = null;
-            GameObject.FindObjectOfType<UI_Manager>().Trigger_Loading();
-            SceneManager.LoadScene(1);
-        }
-    }
-
-    private void AddItem(Item.ItemType type)
-    {
-        if (inv.ContainsKey(type))
-            ++inv[type];
-        else
-            inv[type] = 1;
-
-        if (type == Item.ItemType.Scrap && inv[type] == 4)
-        {
-            inv.Remove(type);
-            if (inv.ContainsKey(Item.ItemType.AttackScroll))
-                ++inv[Item.ItemType.AttackScroll];
-            else
-                inv[Item.ItemType.AttackScroll] = 1;
-        }
-
-        GameObject.FindObjectOfType<UI_Manager>().RefreshInv();
     }
 }

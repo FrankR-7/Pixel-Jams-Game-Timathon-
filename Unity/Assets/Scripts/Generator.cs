@@ -8,6 +8,7 @@ using UnityEngine.AI;
 
 public class Generator : MonoBehaviour
 {
+    public GameObject start;
     public GameObject floor;
     public GameObject end;
     public GameObject wall;
@@ -29,8 +30,8 @@ public class Generator : MonoBehaviour
 
     void Start()
     {
-        m = 30 + (Player.level - 1) * 2;
-        n = 30 + (Player.level - 1) * 2;
+        m = 30; //+ (Player.level - 1) * 2;
+        n = 30; //+ (Player.level - 1) * 2;
 
         Process p = Process.Start(Path.Combine(Application.streamingAssetsPath, "level-gen.exe"), m.ToString()+" "+n.ToString());
         p.StartInfo.UseShellExecute = false;
@@ -150,12 +151,12 @@ public class Generator : MonoBehaviour
 
     private void CreateStart(int i, int x)
     {
-        GameObject block = Instantiate(floor, new Vector3(x * size, 0, i * size), Quaternion.identity);
+        GameObject block = Instantiate(start, new Vector3(x * size, 0, i * size), Quaternion.identity);
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
 
-        Instantiate(player, new Vector3(x * size, size, i * size), Quaternion.identity);
+        player.transform.position = block.transform.position + new Vector3(0,player.transform.localScale.y + 1,0);
     }
 
     private void CreateEnd(int i, int x)
