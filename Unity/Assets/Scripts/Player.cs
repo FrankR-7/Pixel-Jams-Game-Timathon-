@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -40,6 +39,7 @@ public class Player : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        Door.entities.Clear();
         Door.entities.Add(transform);
         Enemy1.player = transform;
         Health = new HealthSystem(100);
@@ -56,7 +56,9 @@ public class Player : MonoBehaviour
                     print(Health.Health);
                     StartCoroutine(JustHurt());
                 }
-
+                break;
+            case "Finish":
+                SceneManager.LoadScene(0);
                 break;
         }
     }
@@ -73,14 +75,12 @@ public class Player : MonoBehaviour
         PlayerMovement();
         
         Click();
+
+        if (transform.position.y < -10)
+        {
+            SceneManager.LoadScene(0);
+        }
         
-        if (isInvisible && Time.time > nextNotInvisible)
-            isInvisible = false;
-        //if (isDewed && (health == max_health || health == nextNotDewed))
-        //{
-          //  health += 1;
-            //isDewed = false;
-        //}
     }
 
     private void Click()

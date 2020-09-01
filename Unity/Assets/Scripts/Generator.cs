@@ -79,28 +79,28 @@ public class Generator : MonoBehaviour
                         CreateEnd(i, x);
                         break;
                     case 7:
-                        CreateChest(i, x);
+                        CreateFloor(i, x);
                         break;
                     case 8:
-                        CreateScrap(i, x);
+                        CreateFloor(i, x);
                         break;
                     case 9:
-                        CreateStrengthPotion(i, x);
+                        CreateGrass(i, x);
                         break;
                     case 10:
-                        CreateHealPotion(i, x);
+                        CreateFloor(i, x);
                         break;
                     case 11:
-                        CreateInvisibilityPotion(i, x);
+                        CreateFloor(i, x);
                         break;
                     case 12:
-                        CreateDewFlask(i, x);
+                        CreateFloor(i, x);
                         break;
                     case 13:
-                        CreateMob(i, x);
+                        CreateGrass(i, x);
                         break;
                     case 14:
-                        CreateChestKey(i, x);
+                        CreateFloor(i, x);
                         break;
                     default:
                         break;
@@ -247,9 +247,6 @@ public class Generator : MonoBehaviour
         block.isStatic = true;
         block.transform.localScale = new Vector3(size, size, size);
         block.transform.SetParent(parent.transform);
-
-        GameObject e = Instantiate(enemy1, new Vector3(x * size, size, i * size), Quaternion.identity);
-        e.transform.SetParent(parent.transform);
     }
 
     private void CreateChestKey(int i, int x)
